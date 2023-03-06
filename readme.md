@@ -10,6 +10,8 @@ as a REST api.
 This service is hosted [on Render](https://all-the-sets.onrender.com): https://all-the-sets.onrender.com
 
 ### API
+| route | |
+|--|--|
 | / | returns the complete list of prime forms |
 | /set/:name | Where name is the classification that Allen Forte uses, for example 3-3 or 5-1 | 
 | /size/:size | Returns all the prime forms of Pitch-Class sets with a given size | 
