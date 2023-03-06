@@ -1,8 +1,7 @@
 {
   "name": "all-the-sets",
   "version": "1.0.0",
-  "description": "A very simple web service to provide the unique prime forms of Pitch-Class Sets
-as listed in Appendix 1 of Allen Forte's Structure Of Atonal Music as a REST api.",
+  "description": "A very simple web service to provide the unique prime forms of Pitch-Class Sets as listed in Appendix 1 of Allen Forte's Structure Of Atonal Music as a REST api.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
