@@ -12,7 +12,7 @@ function arrayEquals(a,b){
   return Array.isArray(a) &&
     Array.isArray(b) &&
     a.length === b.length &&
-    a.every((val,index)=>val===b[index])
+    a.every((val,index)=>val==b[index])
 }
 
 function pcWithSize(size){
@@ -31,7 +31,7 @@ function matchPC(pcs){
     }
   }
   //SORT
-  ints.sort()
+  ints.sort((a,b)=>a-b)
   let asArray = Object.entries(pcData)
   let result = asArray.filter(([key,value])=>arrayEquals(value,ints))
   if (result.length == 0) {
