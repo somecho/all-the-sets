@@ -38,9 +38,30 @@ function matchPC(pcs){
     return {"name":"Not a unique prime form, or not in prime form, or does not exist."}
   } else {
     return {"name":result[0][0],
-            "pcs":ints} //there is only one result from filter
+            "pcs":ints,
+            "intervalVector":pcData[result[0][0]]["intervalVector"]} //there is only one result from filter
   }
 }
+
+function calculateIntervalVector(pcs){
+  let size = pcs.length
+  let LUT = [0,0,1,2,3,4,5,4,3,2,1,0]
+  let intervalVector = [0,0,0,0,0,0]
+  for(let i = 0; i < size; i++){
+    for(let j = i+1; j < size; j ++){
+      let diff = Math.abs(pcs[i]-pcs[j]) % 12
+      let id = LUT[diff];
+      intervalVector[id]++;
+    }
+  }
+  return intervalVector;
+}
+
+let asArray = Object.entries(pcData)
+for(let i in asArray){
+  asArray[i][1]["intervalVector"] = calculateIntervalVector(asArray[i][1]["pcs"])
+}
+let asObject = Object.fromEntries(asArray)
 
 //////////////////////////////
 // ROUTES
@@ -53,7 +74,8 @@ app.get('/set/:name', (req,res)=>{
   let name = pcData[req.params.name] ? req.params.name : "does not exist"
   let response = {
     name,
-    pcs: pcData[req.params.name]["pcs"] || []
+    pcs: pcData[req.params.name]["pcs"] || [],
+    intervalVector: pcData[req.params.name]["intervalVector"] || []
   }
   res.end(JSON.stringify(response))
 })
