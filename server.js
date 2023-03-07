@@ -17,7 +17,7 @@ function arrayEquals(a,b){
 
 function pcWithSize(size){
   let asArray = Object.entries(pcData)
-  let filtered = asArray.filter(([key, value])=> value.length == size)
+  let filtered = asArray.filter(([key, value])=> value["pcs"].length == size)
   return Object.fromEntries(filtered);
 }
 
@@ -33,7 +33,7 @@ function matchPC(pcs){
   //SORT
   ints.sort((a,b)=>a-b)
   let asArray = Object.entries(pcData)
-  let result = asArray.filter(([key,value])=>arrayEquals(value,ints))
+  let result = asArray.filter(([key,value])=>arrayEquals(value["pcs"],ints))
   if (result.length == 0) {
     return {"name":"Not a unique prime form, or not in prime form, or does not exist."}
   } else {
@@ -53,7 +53,7 @@ app.get('/set/:name', (req,res)=>{
   let name = pcData[req.params.name] ? req.params.name : "does not exist"
   let response = {
     name,
-    pcs: pcData[req.params.name] || []
+    pcs: pcData[req.params.name]["pcs"] || []
   }
   res.end(JSON.stringify(response))
 })
