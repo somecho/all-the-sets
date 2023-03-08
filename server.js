@@ -42,6 +42,23 @@ function matchPC(pcs){
             "intervalVector":pcData[result[0][0]]["intervalVector"]} //there is only one result from filter
   }
 }
+function matchIntervalVector(vector){
+  let items = vector.split('');
+  let ints = items.map(i=>parseInt(i))
+  if(ints.length != 6){
+    return {"name":"An interval vector must have 6 values"}
+  }
+  for(let i in ints){
+    if(isNaN(ints[i])){
+      return {"name":"An interval vector can only contain integers"}
+    }
+  }
+  let asArray = Object.entries(pcData)
+  let result = asArray.filter(([key,value])=>arrayEquals(value["intervalVector"],ints))
+  return {"name":result[0][0],
+          "pcs":result[0][1]["pcs"],
+          "intervalVector":result[0][1]["intervalVector"]}
+}
 
 function calculateIntervalVector(pcs){
   let size = pcs.length
@@ -56,12 +73,6 @@ function calculateIntervalVector(pcs){
   }
   return intervalVector;
 }
-
-let asArray = Object.entries(pcData)
-for(let i in asArray){
-  asArray[i][1]["intervalVector"] = calculateIntervalVector(asArray[i][1]["pcs"])
-}
-let asObject = Object.fromEntries(asArray)
 
 //////////////////////////////
 // ROUTES
@@ -87,6 +98,11 @@ app.get('/size/:size', (req,res)=>{
 
 app.get('/pcs/:pcs',(req,res)=>{
   let response = matchPC(req.params.pcs)
+  res.end(JSON.stringify(response))
+})
+
+app.get('/interval-vector/:vector',(req,res)=>{
+  let response = matchIntervalVector(req.params.vector)
   res.end(JSON.stringify(response))
 })
 

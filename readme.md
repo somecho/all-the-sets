@@ -16,6 +16,7 @@ This service is hosted [on Render](https://all-the-sets.onrender.com): https://a
 | /set/:name | Where name is the classification that Allen Forte uses, for example 3-3 or 5-1 | 
 | /size/:size | Returns all the prime forms of Pitch-Class sets with a given size | 
 | /pcs/:pcs | Returns the name of the matching prime form. Example `/pcs/0,1,2,3,4,7` will return `6-z36` |
+|/interval-vector/:vector | Returns the PC set matching the given interval vector. Example: `/interval-vector/111000` will return `3-2` |
 
 ## Running locally
 After cloning this repo
