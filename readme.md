@@ -7,7 +7,8 @@ as a REST api.
 
 ## Usage
 
-This service is hosted [on Render](https://all-the-sets.onrender.com): https://all-the-sets.onrender.com
+This service is hosted [on Render](https://all-the-sets.onrender.com):
+https://all-the-sets.onrender.com and can be queried using http GET requests.
 
 ### API
 | route | |
