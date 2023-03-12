@@ -1,6 +1,10 @@
 var express = require('express')
 var app = express()
 var fs = require('fs')
+var cors = require('cors')
+app.use(cors({
+  origin: "*"
+}))
 
 var pcData = JSON.parse(fs.readFileSync("data.json"))
 let PORT = process.env.PORT || 8081
