@@ -59,9 +59,17 @@ function matchIntervalVector(vector){
   }
   let asArray = Object.entries(pcData)
   let result = asArray.filter(([key,value])=>arrayEquals(value["intervalVector"],ints))
-  return {"name":result[0][0],
-          "pcs":result[0][1]["pcs"],
-          "intervalVector":result[0][1]["intervalVector"]}
+  let output = {
+    "numResults":result.length,
+    "results" : result.map(res=>{
+      return {
+        "name": res[0],
+        "pcs" : res[1]["pcs"],
+        "intervalVector": res[1]["intervalVector"]
+      }
+    })
+  }
+  return output;
 }
 
 function calculateIntervalVector(pcs){
