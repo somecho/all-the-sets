@@ -41,9 +41,16 @@ function matchPC(pcs){
   if (result.length == 0) {
     return {"name":"Not a unique prime form, or not in prime form, or does not exist."}
   } else {
-    return {"name":result[0][0],
-            "pcs":ints,
-            "intervalVector":pcData[result[0][0]]["intervalVector"]} //there is only one result from filter
+    let name = result[0][0]
+    let pcs = ints
+    let intervalVector = pcData[result[0][0]]["intervalVector"]
+    let ivquery = intervalVector.reduce((a,b)=> a+b, "")
+
+    let zrelated = matchIntervalVector(ivquery)
+    zrelated.results = zrelated.results.filter(a=>a.name!==name)
+    zrelated.numResults = zrelated.results.length
+
+    return {name,pcs,intervalVector,zrelated} //there is only one result from filter
   }
 }
 function matchIntervalVector(vector){
